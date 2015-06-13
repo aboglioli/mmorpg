@@ -1,0 +1,2 @@
+-- MMORPG
+create database mmorpg;
