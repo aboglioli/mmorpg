@@ -5,7 +5,10 @@ package com.gestiondatos.db;
  */
 public interface DBQueries {
     String cuentas = "select * from Cuenta";
-    String personajes = "select nombre, nivel, fuerza, vitalidad from Personaje";
+
     String jugadores = "select * from Jugador, Personaje" +
-            "where Jugador.nombre_personaje = Personaje.nombre_personaje";
+            " where Jugador.nombre_personaje = Personaje.nombre";
+
+    String jugador = "select * from Jugador, Personaje" +
+            " where Jugador.nombre_personaje = ? and Jugador.nombre_personaje = Personaje.nombre";
 }

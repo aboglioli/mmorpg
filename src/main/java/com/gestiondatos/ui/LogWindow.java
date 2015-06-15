@@ -30,7 +30,7 @@ public class LogWindow extends JFrame {
     }
 
     public static synchronized void addSeparator() {
-        logMsg += "-------------------<br>";
+        logMsg += "<hr><br>";
         render();
     }
 
@@ -41,6 +41,11 @@ public class LogWindow extends JFrame {
 
     public static synchronized void addBold(String text) {
         logMsg += "<b>"+ text +"</b><br>";
+        render();
+    }
+
+    public static synchronized void addRed(String text) {
+        logMsg += "<font color='red'>"+ text +"</font><br>";
         render();
     }
 

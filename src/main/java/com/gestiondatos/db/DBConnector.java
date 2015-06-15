@@ -9,54 +9,50 @@ import java.sql.*;
  */
 public class DBConnector {
     private Connection conn = null;
-    private PreparedStatement prepStmt = null;
     private ResultSet rs = null;
 
     public DBConnector() {
         try {
             newConnection();
         } catch (Exception exc) {
-            LogWindow.add(exc.toString());
+            LogWindow.addRed(exc.toString());
         }
     }
 
     private void newConnection() throws Exception {
         Class.forName(DBConfig.driver);
         conn = DriverManager.getConnection(DBConfig.url, DBConfig.usuario, DBConfig.contrasenia);
-        LogWindow.add("- NUEVA CONEXIÓN a BD");
+        LogWindow.add("<i>NUEVA CONEXIÓN a BD</i>");
     }
 
     private void closeConnection() throws Exception {
         conn.close();
     }
 
-    private ResultSet query(String query) throws Exception {
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(query);
-        LogWindow.add("-- Consulta simple a BD:");
+    public ResultSet query(String query) {
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery(query);
+        } catch (Exception exc) {
+            LogWindow.addRed(exc.toString());
+        }
         LogWindow.addBold(query);
         return rs;
     }
 
-    private PreparedStatement queryPrepared(String query) throws Exception {
-        PreparedStatement prepStmt = conn.prepareStatement(query);
-        LogWindow.add("-- Consulta preparada a BD:");
+    public PreparedStatement preparedQuery(String query) {
+        PreparedStatement prepStmt = null;
+        try {
+            prepStmt = conn.prepareStatement(query);
+        } catch (Exception exc) {
+            LogWindow.addRed(exc.toString());
+        }
         LogWindow.addBold(query);
         return prepStmt;
     }
 
-    public String getPersonajes() {
-        String res = "";
-        try {
-            rs = query(DBQueries.personajes);
-            while (rs.next()) {
-                res += rs.getString("nombre") +" -- "+ rs.getInt("nivel") +" -- "+ rs.getInt("fuerza");
-                res += "\n";
-            }
-        } catch(Exception exc) {
-            LogWindow.add(exc.toString());
-        }
-        return res;
+    public ResultSet getResultSet() {
+        return rs;
     }
 
     @Override
@@ -64,7 +60,7 @@ public class DBConnector {
         try {
             closeConnection();
         } catch(Exception exc) {
-            LogWindow.add(exc.toString());
+            LogWindow.addRed(exc.toString());
         }
     }
 }

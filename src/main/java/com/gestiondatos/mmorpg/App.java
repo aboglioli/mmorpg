@@ -1,6 +1,6 @@
 package com.gestiondatos.mmorpg;
 
-import com.gestiondatos.db.DBConnector;
+import com.gestiondatos.db.GlobalDAO;
 import com.gestiondatos.ui.LogWindow;
 
 import static spark.Spark.*;
@@ -24,16 +24,18 @@ public class App
         // API REST
         before((req, res) -> {
             log.addSeparator();
-            log.add("Petición a /home desde "+ req.ip() +" con navegador ["+ req.userAgent() +"]");
+            log.add("Petición a <font color='blue'>"+ req.uri() +"</font> desde "+ req.ip() +
+                    " con navegador [<font color='gray'>"+ req.userAgent() +"</font>]");
         });
-        after((req, res) -> {
-            log.addSeparator();
+
+        get("/cuenta", "application/json", (req, res) -> {
+            return "[esa=hola]";
         });
-        get("/personajes", (req, res) -> {
-            DBConnector db = new DBConnector();
-            String ret = db.getPersonajes();
-            db = null;
-            return ret;
+        get("/jugador", "application/json", (req, res) -> {
+            return GlobalDAO.getJugador();
+        });
+        get("/jugador/:nombrePersonaje", "application/json", (req, res) -> {
+            return GlobalDAO.getJugador();
         });
     }
 }
