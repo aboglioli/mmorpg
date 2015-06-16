@@ -1,16 +1,16 @@
-<div class="row">
-    <div class="col-md-3 col-md-offset-1">
+<div class="row" ng-hide="cuenta.usuario">
+    <div class="col-md-4 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">Crear cuenta</div>
             <div class="panel-body">
-                <form class="form">
+                <form class="form" ng-submit="crearCuenta()">
                     <div class="form-group">
                         <label for="usuario">Usuario:</label>
-                        <input type="text" class="form-control" model="usuario"/>
-                    </div>
-                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="usuario"/>
+                        <label for="email">E-mail:</label>
+                        <input type="text" class="form-control" ng-model="email"/>
                         <label for="contrasenia">Contraseña:</label>
-                        <input type="password" class="form-control" model="conrasenia"/>
+                        <input type="password" class="form-control" ng-model="contrasenia"/>
                     </div>
                     <button class="btn btn-primary">Crear</button>
                 </form>
@@ -19,31 +19,29 @@
     </div>
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">Registrar personaje</div>
+            <div class="panel-heading">Ingresar cuenta</div>
             <div class="panel-body">
-                <form class="form">
+                <form class="form" ng-submit="ingresarCuenta()">
                     <div class="form-group">
                         <label for="usuario">Usuario:</label>
-                        <input type="text" class="form-control" model="usuario"/>
+                        <input type="text" class="form-control" ng-model="usuario"/>
                         <label for="contrasenia">Contraseña:</label>
-                        <input type="password" class="form-control" model="conrasenia"/>
+                        <input type="password" class="form-control" ng-model="contrasenia"/>
                     </div>
-                    <div class="form-group">
-                        <label for="usuario">Usuario:</label>
-                        <input type="text" class="form-control" model="usuario"/>
-                        <label for="contrasenia">Contraseña:</label>
-                        <input type="password" class="form-control" model="conrasenia"/>
-                    </div>
-                    <button class="btn btn-primary">Crear</button>
+                    <button class="btn btn-primary">Ingresar</button>
                 </form>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">Crear cuenta</div>
-            <div class="panel-body">
+</div>
 
+
+<div class="row" ng-show="cuenta.usuario">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Usuario {{cuenta.usuario}}</div>
+            <div class="panel-body">
+                Huala
             </div>
         </div>
     </div>

@@ -28,14 +28,14 @@ public class App
                     " con navegador [<font color='gray'>"+ req.userAgent() +"</font>]");
         });
 
-        get("/cuenta", "application/json", (req, res) -> {
-            return "[esa=hola]";
+        // Get
+
+        // Post
+        post("/cuenta/crear", "application/json", (req, res) -> {
+            return "{}"; //QueryToJSON.newCuenta(req.body());
         });
-        get("/jugador", "application/json", (req, res) -> {
-            return QueryToJSON.getJugador();
-        });
-        get("/jugador/:nombrePersonaje", "application/json", (req, res) -> {
-            return QueryToJSON.getJugador();
+        post("/cuenta/ingresar", "application/json", (req, res) -> {
+            return QueryToJSON.getCuenta(req.body());
         });
     }
 }

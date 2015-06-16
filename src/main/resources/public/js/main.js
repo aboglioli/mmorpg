@@ -21,13 +21,4 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]);
 
 app.controller('HomeCtrl', ['$scope', function($scope) {
-    $scope.hola = ";)";
-}]);
-
-app.controller('UserCtrl', ['$scope', function($scope) {
-    $scope.hola = ";)";
-}]);
-
-app.controller('AdminCtrl', ['$scope', function($scope) {
-    $scope.hola = ";)";
 }]);
