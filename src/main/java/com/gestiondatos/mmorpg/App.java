@@ -1,6 +1,6 @@
 package com.gestiondatos.mmorpg;
 
-import com.gestiondatos.db.GlobalDAO;
+import com.gestiondatos.db.QueryToJSON;
 import com.gestiondatos.ui.LogWindow;
 
 import static spark.Spark.*;
@@ -32,10 +32,10 @@ public class App
             return "[esa=hola]";
         });
         get("/jugador", "application/json", (req, res) -> {
-            return GlobalDAO.getJugador();
+            return QueryToJSON.getJugador();
         });
         get("/jugador/:nombrePersonaje", "application/json", (req, res) -> {
-            return GlobalDAO.getJugador();
+            return QueryToJSON.getJugador();
         });
     }
 }

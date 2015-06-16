@@ -1,12 +1,12 @@
 /* CUENTA */
-insert into Cuenta (usuario, email, contrasenia) values (
-	"gm", "alanboglioli@gmail.com", password("poqw2des")
+insert into Cuenta (usuario, email, contrasenia, codigo_estado) values (
+	"gm", "alanboglioli@gmail.com", password("1234"), 1
 );
-insert into Cuenta (usuario, email, contrasenia) values (
-	"prueba", "alanboglioli@gmail.com", password("1234")
+insert into Cuenta (usuario, email, contrasenia, codigo_estado) values (
+	"prueba", "alanboglioli@gmail.com", password("1234"), 1
 );
-insert into Cuenta (usuario, email, contrasenia) values (
-	"prueba2", "alanboglioli@gmail.com", password("1234")
+insert into Cuenta (usuario, email, contrasenia, codigo_estado) values (
+	"prueba2", "alanboglioli@gmail.com", password("1234"), 1
 );
 
 /* JUGADOR */

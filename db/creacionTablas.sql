@@ -52,13 +52,22 @@ create table NPC (
 );
 
 -- Jugador
+create table Estado_Cuenta (
+	codigo int not null auto_increment,
+	nombre varchar(20) not null,
+	descripcion varchar(128),
+	primary key(codigo)
+);
+
 create table Cuenta (
 	usuario varchar(20) not null check (len(usuario) > 6),
 	email varchar(32) not null,
 	contrasenia char(41) not null,
 	fecha_creacion datetime default current_timestamp,
 	fecha_modificacion datetime on update current_timestamp,
-	primary key(usuario)
+	codigo_estado int not null,
+	primary key(usuario),
+	foreign key(codigo_estado) references Estado_Cuenta(codigo)
 );
 
 create table Clase (
@@ -261,3 +270,8 @@ insert into Tipo_Item (nombre, equipable, consumible) values ('Joya', 'S', 'N');
 insert into Tipo_Item (nombre, equipable, consumible) values ('Poción', 'N', 'S');
 insert into Tipo_Item (nombre, equipable, consumible) values ('Hechizo', 'S', 'S');
 insert into Tipo_Item (nombre, equipable, consumible) values ('Reliquia', 'S', 'S');
+
+insert into Estado_Cuenta (nombre, descripcion) values ("Habilitada", "El usuario de la Cuenta puede jugar.");
+insert into Estado_Cuenta (nombre, descripcion) values ("Bloqueada",
+	"El usuario se encuentra bloqueado porque pudo haber infringido las políticas y/o reglas del juego.");
+insert into Estado_Cuenta (nombre, descripcion) values ("Cerrada", "El usuario o un administrador cerró esta cuenta. Esto puede ser temporal o permanentemente.");
