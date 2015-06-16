@@ -12,11 +12,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             templateUrl: '/pages/user.html',
             controller: 'UserCtrl'
         })
-        .state('game', {
-            url: '/game',
-            templateUrl: '/pages/game.html',
-            controller: 'GameCtrl'
-        })
         .state('admin', {
             url: '/admin',
             templateUrl: '/pages/admin.html',
@@ -30,10 +25,6 @@ app.controller('HomeCtrl', ['$scope', function($scope) {
 }]);
 
 app.controller('UserCtrl', ['$scope', function($scope) {
-    $scope.hola = ";)";
-}]);
-
-app.controller('GameCtrl', ['$scope', function($scope) {
     $scope.hola = ";)";
 }]);
 
