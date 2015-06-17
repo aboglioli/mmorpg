@@ -69,13 +69,14 @@ public class App
                 json = new JSONObject();
                 json.put("usuario", ret[0]);
                 json.put("email", ret[1]);
+                req.session().attribute("usuario", ret[0]);
                 return json.toJSONString();
             }
             return "{\"msg\": \"No se pudo crear la cuenta\"}";
         });
         post("/cuenta/ingresar", "application/json", (req, res) -> {
             JSONObject json = (JSONObject) JSONValue.parse(req.body());
-            Object ret[] = Querier.getCuenta((String) json.get("usuario"), (String) json.get("contrasenia"));
+            Object ret[] = Querier.getCuenta((String)json.get("usuario"), (String)json.get("contrasenia"));
             if (ret.length > 0) {
                 json = new JSONObject();
                 json.put("usuario", ret[0]);
@@ -84,6 +85,31 @@ public class App
                 return json.toJSONString();
             }
             return "{\"msg\": \"La cuenta ingresada no existe\"}";
+        });
+        post("/jugador", "application/json", (req, res) -> {
+            JSONObject json = (JSONObject) JSONValue.parse(req.body());
+            if (req.session().attribute("usuario").equals((String) json.get("usuario"))) {
+                Object ret[] = Querier.setJugador((String)json.get("usuario"), (String)json.get("nombre"),
+                        (String) json.get("clase"));
+                if (ret.length > 0) {
+                    json = new JSONObject();
+                    json.put("nombre", ret[0]);
+                    json.put("clase", ret[1]);
+                    json.put("nivel", ret[2]);
+                    json.put("experiencia", ret[3]);
+                    json.put("fuerza", ret[4]);
+                    json.put("agilidad", ret[5]);
+                    json.put("energia", ret[6]);
+                    json.put("vitalidad", ret[7]);
+                    json.put("vida", ret[8]);
+                    json.put("mana", ret[9]);
+                    json.put("mapa", ret[10]);
+                    json.put("posicion_x", ret[11]);
+                    json.put("posicion_y", ret[12]);
+                    return json.toJSONString();
+                }
+            }
+            return "{\"msg\": \"El personaje no se pudo crear\"}";
         });
     }
 }

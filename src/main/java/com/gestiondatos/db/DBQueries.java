@@ -15,6 +15,14 @@ public interface DBQueries {
         " from Cuenta cu, Jugador j, Personaje p, Clase c, Mapa m"+
         " where cu.usuario = ? and cu.usuario = j.usuario_cuenta and j.nombre_personaje = p.nombre and"+
         " j.codigo_clase = c.codigo and p.numero_mapa = m.numero";
+    String jugador_usuario = "select p.nombre, c.nombre clase, p.nivel, p.experiencia,"+
+        " p.fuerza, p.agilidad, p.energia, p.vitalidad, p.vida, p.mana, m.nombre mapa, p.posicion_x, p.posicion_y"+
+        " from Cuenta cu, Jugador j, Personaje p, Clase c, Mapa m"+
+        " where cu.usuario = ? and cu.usuario = j.usuario_cuenta and j.nombre_personaje = ? and" +
+        " j.nombre_personaje = p.nombre and j.codigo_clase = c.codigo and p.numero_mapa = m.numero";
+
+    String nuevo_personaje = "insert into Personaje (nombre) values (?)";
+    String nuevo_jugador = "insert into Jugador (usuario_cuenta, nombre_personaje, codigo_clase) values (?, ?, ?)";
 
     /* GM */
     String gmCuentas = "select * from Cuenta";

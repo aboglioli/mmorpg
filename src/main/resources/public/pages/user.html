@@ -6,11 +6,11 @@
                 <form class="form" ng-submit="crearCuenta()">
                     <div class="form-group">
                         <label for="usuario">Usuario:</label>
-                        <input type="text" class="form-control" ng-model="cr_usuario"/>
+                        <input id="usuario" type="text" class="form-control" ng-model="cr_usuario"/>
                         <label for="email">E-mail:</label>
-                        <input type="text" class="form-control" ng-model="cr_email"/>
+                        <input id="email" type="text" class="form-control" ng-model="cr_email"/>
                         <label for="contrasenia">Contraseña:</label>
-                        <input type="password" class="form-control" ng-model="cr_contrasenia"/>
+                        <input id="contrasenia" type="password" class="form-control" ng-model="cr_contrasenia"/>
                     </div>
                     <button class="btn btn-primary">Crear</button>
                 </form>
@@ -24,9 +24,9 @@
                 <form class="form" ng-submit="ingresarCuenta()">
                     <div class="form-group">
                         <label for="usuario">Usuario:</label>
-                        <input type="text" class="form-control" ng-model="ing_usuario"/>
+                        <input id="usuario" type="text" class="form-control" ng-model="ing_usuario"/>
                         <label for="contrasenia">Contraseña:</label>
-                        <input type="password" class="form-control" ng-model="ing_contrasenia"/>
+                        <input id="contrasenia" type="password" class="form-control" ng-model="ing_contrasenia"/>
                     </div>
                     <button class="btn btn-primary">Ingresar</button>
                 </form>
@@ -37,12 +37,87 @@
 
 
 <div class="row" ng-show="cuenta.usuario">
-    <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Usuario {{cuenta.usuario}}</div>
-            <div class="panel-body">
-                Huala
+    <div class="well">
+        Haz ingresado como <b>{{cuenta.usuario}}</b> (<i>{{cuenta.email}}</i>)
+    </div>
+
+    <!-- Crear personaje -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class ="panel panel-default">
+                <div class="panel-heading">
+                    Crear personaje
+                </div>
+                <div class="panel-body">
+                    <form class="form" ng-submit="crearJugador()">
+                        <div class="form-group" role="form">
+                            <label for="nombre">Nombre:</label>
+                            <input id="nombre" type="text" class="form-control" ng-model="cr_nombre"/>
+                            <label for="clase">Clase:</label>
+                            <select id="clase" class="form-control" ng-model="cr_clase">
+                                <option value="1">Guerrero</option>
+                                <option value="2">Mago</option>
+                                <option value="3">Clérigo</option>
+                                <option value="4">Arquero</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary">Crear personaje</button>
+                    </form>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Personajes -->
+    <div class="panel panel-default">
+        <div class="panel-heading">Tus personajes</div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Clase</th>
+                        <th>Nivel</th>
+                        <th>Experiencia</th>
+                        <th>Fuerza</th>
+                        <th>Agilidad</th>
+                        <th>Energia</th>
+                        <th>Vitalidad</th>
+                        <th>Vida</th>
+                        <th>Mana</th>
+                        <th>Mapa</th>
+                        <th>Posicion X</th>
+                        <th>Posicion Y</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="jugador in jugadores">
+                        <td>{{jugador.nombre}}</td>
+                        <td>{{jugador.clase}}</td>
+                        <td>{{jugador.nivel}}</td>
+                        <td>{{jugador.experiencia}}</td>
+                        <td>{{jugador.fuerza}}</td>
+                        <td>{{jugador.agilidad}}</td>
+                        <td>{{jugador.energia}}</td>
+                        <td>{{jugador.vitalidad}}</td>
+                        <td>{{jugador.vida}}</td>
+                        <td>{{jugador.mana}}</td>
+                        <td>{{jugador.mapa}}</td>
+                        <td>{{jugador.posicion_x}}</td>
+                        <td>{{jugador.posicion_y}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Juego -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Juego
+        </div>
+        <div class="panel-body">
+
         </div>
     </div>
 </div>

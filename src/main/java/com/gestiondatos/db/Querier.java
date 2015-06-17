@@ -94,4 +94,43 @@ public class Querier {
 
         return r;
     }
+
+    public static Object[] setJugador(String usuario, String nombre, String clase) {
+        DBConnector db = new DBConnector();
+        PreparedStatement prep1 = db.preparedQuery(DBQueries.nuevo_personaje);
+        PreparedStatement prep2 = db.preparedQuery(DBQueries.nuevo_jugador);
+        ArrayList<Object> ret = new ArrayList<Object>();
+        try {
+            prep1.setString(1, nombre);
+            prep2.setString(1, usuario);
+            prep2.setString(2, nombre);
+            prep2.setString(3, clase);
+            int i1 = prep1.executeUpdate();
+            int i2 = prep2.executeUpdate();
+            if(i1 > 0 && i2 > 0) {
+                PreparedStatement prep = db.preparedQuery(DBQueries.jugador_usuario);
+                prep.setString(1, usuario);
+                prep.setString(2, nombre);
+                ResultSet rs = prep.executeQuery();
+                while(rs.next()) {
+                    ret.add(rs.getString("nombre"));
+                    ret.add(rs.getString("clase"));
+                    ret.add(rs.getString("nivel"));
+                    ret.add(rs.getString("experiencia"));
+                    ret.add(rs.getString("fuerza"));
+                    ret.add(rs.getString("agilidad"));
+                    ret.add(rs.getString("energia"));
+                    ret.add(rs.getString("vitalidad"));
+                    ret.add(rs.getString("vida"));
+                    ret.add(rs.getString("mana"));
+                    ret.add(rs.getString("mapa"));
+                    ret.add(rs.getString("posicion_x"));
+                    ret.add(rs.getString("posicion_y"));
+                }
+            }
+        } catch (SQLException exc) {
+            LogWindow.addRed(exc.toString());
+        }
+        return ret.toArray();
+    }
 }
