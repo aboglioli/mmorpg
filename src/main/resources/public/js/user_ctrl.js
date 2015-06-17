@@ -1,20 +1,30 @@
 app.factory('cuenta', ['$http', function($http) {
     var o = {
-        cuenta: {
+        cuenta : {
             usuario: '',
             email: ''
-        }
+        },
+        jugadores: []
     };
-    o.ingresar = function(cuenta) {
+    o.getCuenta = function(cuenta) {
         return $http.post('/cuenta/ingresar', cuenta).success(function(data) {
+            console.log(data);
+            if(data.msg == null) {
+                angular.copy(data, o.cuenta);
+                o.getJugadores(o.cuenta.usuario);
+            }
+        });
+    }
+    o.setCuenta = function(cuenta) {
+        return $http.post('/cuenta/crear', cuenta).success(function(data) {
             console.log(data);
             angular.copy(data, o.cuenta);
         });
     }
-    o.crear = function(cuenta) {
-        return $http.post('/cuenta/crear', cuenta).success(function(data) {
+    o.getJugadores = function(usuario) {
+        return $http.get('/jugadores/'+usuario).success(function(data) {
             console.log(data);
-            angular.copy(data, o.cuenta);
+            angular.copy(data, o.jugadores);
         });
     }
 
@@ -23,7 +33,10 @@ app.factory('cuenta', ['$http', function($http) {
 
 app.controller('UserCtrl', ['$scope', 'cuenta', function($scope, cuenta) {
     $scope.cuenta = cuenta.cuenta;
+    $scope.crearCuenta = function() {
+        cuenta.setCuenta({usuario: $scope.cr_usuario, email: $scope.cr_email, contrasenia: $scope.cr_contrasenia});
+    }
     $scope.ingresarCuenta = function() {
-        cuenta.ingresar({usuario: $scope.usuario, email: $scope.email, contrasenia: $scope.contrasenia});
+        cuenta.getCuenta({usuario: $scope.ing_usuario, contrasenia: $scope.ing_contrasenia});
     }
 }]);

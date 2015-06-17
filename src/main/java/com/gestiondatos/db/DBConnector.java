@@ -22,7 +22,6 @@ public class DBConnector {
     private void newConnection() throws Exception {
         Class.forName(DBConfig.driver);
         conn = DriverManager.getConnection(DBConfig.url, DBConfig.usuario, DBConfig.contrasenia);
-        LogWindow.add("<i>NUEVA CONEXIÓN a BD</i>");
     }
 
     private void closeConnection() throws Exception {

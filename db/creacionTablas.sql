@@ -65,7 +65,7 @@ create table Cuenta (
 	contrasenia char(41) not null,
 	fecha_creacion datetime default current_timestamp,
 	fecha_modificacion datetime on update current_timestamp,
-	codigo_estado int not null,
+	codigo_estado int not null default 1,
 	primary key(usuario),
 	foreign key(codigo_estado) references Estado_Cuenta(codigo)
 );

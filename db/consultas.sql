@@ -26,9 +26,10 @@ order by ti.nombre;
 
 /* Todos los Jugadores o Personajes que pertenecen a una determinada Cuenta */
 select j.usuario_cuenta, p.nombre, c.nombre clase, j.fecha_creacion, p.nivel, p.experiencia,
-				p.fuerza, p.agilidad, p.energia, p.vitalidad, p.vida, p.mana, m.nombre mapa, p.posicion_x, p.posicion_y
+	p.fuerza, p.agilidad, p.energia, p.vitalidad, p.vida, p.mana, m.nombre mapa, p.posicion_x, p.posicion_y
 from Cuenta cu, Jugador j, Personaje p, Clase c, Mapa m
-where cu.usuario = "GM" and cu.usuario = j.usuario_cuenta and j.nombre_personaje = p.nombre and j.codigo_clase = c.codigo and p.numero_mapa = m.numero;
+where cu.usuario = "GM" and cu.usuario = j.usuario_cuenta and j.nombre_personaje = p.nombre and
+	j.codigo_clase = c.codigo and p.numero_mapa = m.numero;
 
 /* Cantidad de Jugadores por Cuenta */
 select cu.usuario, cu.email, count(j.nombre_personaje) cant_personajes
