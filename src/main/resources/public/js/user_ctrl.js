@@ -12,26 +12,39 @@ app.factory('cuenta', ['$http', function($http) {
             if(data.msg == null) {
                 angular.copy(data, o.cuenta);
                 o.getJugadores(o.cuenta.usuario);
+            } else {
+                alert(data.msg);
             }
         });
     }
     o.setCuenta = function(cuenta) {
         return $http.post('/cuenta/crear', cuenta).success(function(data) {
             console.log(data);
-            angular.copy(data, o.cuenta);
+            if(data.msg == null) {
+                angular.copy(data, o.cuenta);
+            } else {
+                alert(data.msg);
+            }
         });
     }
     o.getJugadores = function(usuario) {
         return $http.get('/jugadores/'+usuario).success(function(data) {
             console.log(data);
-            angular.copy(data, o.jugadores);
+            if(data.msg == null) {
+                angular.copy(data, o.jugadores);
+            } else {
+                alert(data.msg);
+            }
         });
     }
     o.setJugador = function(jugador) {
         return $http.post('/jugador', jugador).success(function(data) {
             console.log(data);
-            o.jugadores.push(data);
-            //angular.copy(data, o.jugadores);
+            if(data.msg == null) {
+                o.jugadores.push(data);
+            } else {
+                alert(data.msg);
+            }
         });
     }
 
