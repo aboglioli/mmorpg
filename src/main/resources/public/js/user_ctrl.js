@@ -11,7 +11,7 @@ app.factory('cuenta', ['$http', function($http) {
             console.log(data);
             if(data.msg == null) {
                 angular.copy(data, o.cuenta);
-                o.getJugadores(o.cuenta.usuario);
+                o.getJugadores();
             } else {
                 alert(data.msg);
             }
@@ -27,8 +27,8 @@ app.factory('cuenta', ['$http', function($http) {
             }
         });
     }
-    o.getJugadores = function(usuario) {
-        return $http.get('/jugadores/'+usuario).success(function(data) {
+    o.getJugadores = function() {
+        return $http.get('/jugadores/').success(function(data) {
             console.log(data);
             if(data.msg == null) {
                 angular.copy(data, o.jugadores);
