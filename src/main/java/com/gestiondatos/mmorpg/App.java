@@ -61,9 +61,16 @@ public class App
         });
         get("/atacar/jugador/:nombre", "application/json", (req, res) -> {
             if(req.session().attribute("usuario") != null) {
-
+                Object ret[] = Querier.atacarJugador(req.session().attribute("usuario"), req.params(":nombre"));
+                if(ret.length > 0) {
+                    JSONArray jsonArr = new JSONArray();
+                    for(Object enfrentamiento : ret) {
+                       jsonArr.add((String)enfrentamiento);
+                    }
+                    return jsonArr.toJSONString();
+                }
             }
-            return "{\"msg\": \"Usuario inválido\"}";
+            return "{\"msg\": \"Usuario inválido o no existen jugadores\"}";
         });
 
         // Post
@@ -95,7 +102,7 @@ public class App
         post("/jugador", "application/json", (req, res) -> {
             JSONObject json = (JSONObject) JSONValue.parse(req.body());
             if (req.session().attribute("usuario").equals((String) json.get("usuario"))) {
-                Object ret[] = Querier.setJugador((String)json.get("usuario"), (String)json.get("nombre"),
+                Object ret[] = Querier.setJugador((String) json.get("usuario"), (String) json.get("nombre"),
                         (String) json.get("clase"));
                 if (ret.length > 0) {
                     json = new JSONObject();

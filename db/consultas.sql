@@ -52,8 +52,11 @@ where j.nombre_personaje = "GM" and inv.nombre_personaje = j.nombre_personaje an
 			i.codigo_tipo_item = ti.codigo
 order by i.nombre, ti.nombre;
 
-/* Jugadores con sus incrementos debido a la Clase a la que pertenecen */
-select p.nombre, c.nombre clase, p.nivel, p.experiencia, p.fuerza*c.aumento_fuerza, p.agilidad*c.aumento_agilidad,
-	p.energia*c.aumento_energia, p.vitalidad*c.aumento_vitalidad, p.vida, p.mana
-from Cuenta cu, Jugador j, Personaje p, Clase c
-where cu.usuario = j.usuario_cuenta and j.nombre_personaje = p.nombre and j.codigo_clase = c.codigo
+/* Jugador al azar con sus incrementos debido a la Clase a la que pertenece. Usado para que determinado personaje ataque a otro  */
+select p.nombre, c.nombre clase, p.nivel, p.experiencia,
+	p.fuerza*c.aumento_fuerza fuerza, p.agilidad*c.aumento_agilidad agilidad, p.energia*c.aumento_energia energia,
+	p.vitalidad*c.aumento_vitalidad vitalidad, p.vida, p.mana, m.nombre mapa, p.posicion_x, p.posicion_y
+from Cuenta cu, Jugador j, Personaje p, Clase c, Mapa m
+where cu.usuario != ? and cu.usuario = j.usuario_cuenta and j.nombre_personaje = p.nombre and
+	j.codigo_clase = c.codigo and j.codigo_clase != 5 and p.numero_mapa = m.numero
+order by rand() limit 1

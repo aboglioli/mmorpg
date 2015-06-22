@@ -24,8 +24,8 @@ create table Personaje (
 	agilidad int default 1 check(agilidad > 0),
 	energia int default 1 check(energia > 0),
 	vitalidad int default 1 check(vitalidad > 0),
-	vida int default 15 check(vida > 0),
-	mana int default 15 check(mana > 0),
+	vida int default 20 check(vida > 0),
+	mana int default 20 check(mana > 0),
 	numero_mapa int default 1,
 	posicion_x int default 0,
 	posicion_y int default 0,
@@ -74,10 +74,10 @@ create table Clase (
 	codigo int not null auto_increment,
 	nombre varchar(20) not null,
 	descripcion varchar(256),
-	aumento_fuerza float(3,2) default 1.00,
-	aumento_agilidad float(3,2) default 1.00,
-	aumento_energia float(3,2) default 1.00,
-	aumento_vitalidad float(3,2) default 1.00,
+	aumento_fuerza int default 1,
+	aumento_agilidad int default 1,
+	aumento_energia int default 1,
+	aumento_vitalidad int default 1,
 	primary key(codigo)
 );
 
@@ -186,26 +186,26 @@ create table Mapa_Item (
 insert into Clase (nombre, descripcion, aumento_fuerza, aumento_agilidad) values (
 	'Guerrero',
 	'Utiliza su fuerza para enfrentar a sus enemigos. Es capaz de manipular gran cantidad de espadas, lanzas, mazos, armaduras.',
-	2.5,
-	1.5
+	3,
+	2
 );
 insert into Clase (nombre, descripcion, aumento_energia, aumento_vitalidad) values (
 	'Mago',
 	'Es capaz de controlar los 4 elementos: agua, tierra, fuego, aire. Y hacer uso de armas que lo dotan de hechizos y conjuros.',
-	2.7,
-	1.8
+	3,
+	2
 );
 insert into Clase (nombre, descripcion, aumento_vitalidad, aumento_fuerza) values (
 	'Clérigo',
 	'Capaz de invocar hechizos par revitalizar a sus aliados o dañar a sus enemigos. Posee gran cantidad de vida.',
-	3.5,
-	1.8
+	4,
+	2
 );
 insert into Clase (nombre, descripcion, aumento_agilidad, aumento_fuerza) values (
 	'Arquero',
 	'Haciendo uso de arcos, flechas y lanzas, es capaz de atacar a sus enemigos desde una distancia segura.',
-	4.0,
-	1.5
+	4,
+	2
 );
 insert into Clase (nombre, descripcion) values (
 	'GM',
@@ -233,7 +233,6 @@ insert into Tipo_NPC (nombre, descripcion) values (
 
 insert into Mundo (nombre) values ('Mundo 1');
 insert into Mundo (nombre) values ('Mundo 2');
-insert into Mundo (nombre) values ('Mundo VIP');
 
 insert into Mapa (nombre, descripcion, numero_mundo) values (
 	"Bosque 1", "Inicial, desde donde todos parten.", 1
@@ -245,13 +244,13 @@ insert into Mapa (nombre, descripcion, numero_mundo) values (
 	"Bosque 3", "Enemigos cada vez más poderosos.", 1
 );
 insert into Mapa (nombre, descripcion, numero_mundo) values (
-	"Bosque 1", "Inicial, desde donde todos parten.", 3
+	"Bosque 1", "Inicial, desde donde todos parten.", 2
 );
 insert into Mapa (nombre, descripcion, numero_mundo) values (
-	"Bosque 2", "Comienza la aventura.", 3
+	"Bosque 2", "Comienza la aventura.", 2
 );
 insert into Mapa (nombre, descripcion, numero_mundo) values (
-	"Bosque 3", "Enemigos cada vez más poderosos.", 3
+	"Bosque 3", "Enemigos cada vez más poderosos.", 2
 );
 
 insert into Tipo_Item (nombre, equipable, consumible) values ('Casco', 'S', 'N');

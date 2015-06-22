@@ -4,7 +4,8 @@ app.factory('cuenta', ['$http', function($http) {
             usuario: '',
             email: ''
         },
-        jugadores: []
+        jugadores: [],
+				batalla: []
     };
     o.getCuenta = function(cuenta) {
         return $http.post('/cuenta/ingresar', cuenta).success(function(data) {
@@ -47,6 +48,16 @@ app.factory('cuenta', ['$http', function($http) {
             }
         });
     }
+		o.atacarJugador = function(jugador) {
+        return $http.get('/atacar/jugador/'+jugador).success(function(data) {
+            console.log(data);
+            if(data.msg == null) {
+                angular.copy(data, o.batalla) ;
+            } else {
+                alert(data.msg);
+            }
+        });
+		}
 
     return o;
 }]);
@@ -54,6 +65,7 @@ app.factory('cuenta', ['$http', function($http) {
 app.controller('UserCtrl', ['$scope', 'cuenta', function($scope, cuenta) {
     $scope.cuenta = cuenta.cuenta;
     $scope.jugadores = cuenta.jugadores;
+		$scope.batalla = cuenta.batalla;
 
     $scope.crearCuenta = function() {
         cuenta.setCuenta({usuario: $scope.cr_usuario, email: $scope.cr_email, contrasenia: $scope.cr_contrasenia});
@@ -66,4 +78,7 @@ app.controller('UserCtrl', ['$scope', 'cuenta', function($scope, cuenta) {
         $scope.cr_nombre = '';
         $scope.cr_clase = '';
     }
+		$scope.atacarJugador = function() {
+			cuenta.atacarJugador($scope.s_jugador.nombre);
+		}
 }]);

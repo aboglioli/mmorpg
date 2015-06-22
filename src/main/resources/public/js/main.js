@@ -11,12 +11,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
             url: '/user',
             templateUrl: '/pages/user.html',
             controller: 'UserCtrl'
-        })
-        .state('admin', {
+        });
+        /* .state('admin', {
             url: '/admin',
             templateUrl: '/pages/admin.html',
             controller: 'AdminCtrl'
-        });
+        }); */
     $urlRouterProvider.otherwise('home');
 }]);
 

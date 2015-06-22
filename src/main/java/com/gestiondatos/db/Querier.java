@@ -1,16 +1,12 @@
 package com.gestiondatos.db;
 
 import com.gestiondatos.ui.LogWindow;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.Random;
 
 /**
  * Created by kiriost on 15/06/15.
@@ -134,13 +130,54 @@ public class Querier {
         return ret.toArray();
     }
 
-    public static Object[] atacarJugador() {
+    public static Object[] atacarJugador(String usuario, String jugador) {
         DBConnector db = new DBConnector();
         ArrayList<Object> ret = new ArrayList<Object>();
         try {
+            PreparedStatement prep_jugador1 = db.preparedQuery(DBQueries.jugador_usuario);
+            prep_jugador1.setString(1, usuario);
+            prep_jugador1.setString(2, jugador);
+            ResultSet jugador1 = prep_jugador1.executeQuery();
 
+            PreparedStatement prep_jugador2 = db.preparedQuery(DBQueries.jugador_azar);
+            prep_jugador2.setString(1, usuario);
+            prep_jugador2.setString(2, jugador);
+            ResultSet jugador2 = prep_jugador2.executeQuery();
+
+            if(jugador1.next() && jugador2.next()) {
+                //Batalla
+                Random rand = new Random();
+                int jugador1_vida = jugador1.getInt("vida");
+                int jugador2_vida = jugador2.getInt("vida");
+                for(int i=0;;) {
+                    int jugador1_golpe = rand.nextInt(jugador1.getInt("fuerza") + jugador1.getInt("agilidad") +
+                        jugador1.getInt("energia"));
+                    jugador2_vida -= jugador1_golpe;
+                    if(jugador2_vida <= 0) {
+                        ret.add(jugador1.getString("nombre") +" gana!");
+                        break;
+                    } else {
+                        ret.add("("+ i++ +")"+ jugador1.getString("nombre") +" golpea con "+ jugador1_golpe +
+                                " ["+ jugador2.getString("nombre") +" queda con "+ jugador2_vida +" de vida]");
+                    }
+
+                    int jugador2_golpe = rand.nextInt(jugador2.getInt("fuerza") + jugador2.getInt("agilidad") +
+                            jugador2.getInt("energia"));
+                    jugador1_vida -= jugador2_golpe;
+                    if(jugador1_vida <= 0) {
+                        ret.add(jugador2.getString("nombre") +" gana!");
+                        break;
+                    } else {
+                        ret.add("("+ i++ +")"+ jugador2.getString("nombre") +" golpea con "+ jugador2_golpe +
+                                " ["+ jugador1.getString("nombre") +" queda con "+ jugador1_vida +" de vida]");
+                    }
+
+                }
+            }
         } catch (SQLException exc) {
             LogWindow.addRed(exc.toString());
         }
+
+        return ret.toArray();
     }
 }
