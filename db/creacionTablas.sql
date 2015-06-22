@@ -74,10 +74,10 @@ create table Clase (
 	codigo int not null auto_increment,
 	nombre varchar(20) not null,
 	descripcion varchar(256),
-	indice_aumento_fuerza float(3,2) default 1.00,
-	indice_aumento_agilidad float(3,2) default 1.00,
-	indice_aumento_energia float(3,2) default 1.00,
-	indice_aumento_vitalidad float(3,2) default 1.00,
+	aumento_fuerza float(3,2) default 1.00,
+	aumento_agilidad float(3,2) default 1.00,
+	aumento_energia float(3,2) default 1.00,
+	aumento_vitalidad float(3,2) default 1.00,
 	primary key(codigo)
 );
 
@@ -183,25 +183,25 @@ create table Mapa_Item (
 );
 
 /* Inserción de nomencladores */
-insert into Clase (nombre, descripcion, indice_aumento_fuerza, indice_aumento_agilidad) values (
+insert into Clase (nombre, descripcion, aumento_fuerza, aumento_agilidad) values (
 	'Guerrero',
 	'Utiliza su fuerza para enfrentar a sus enemigos. Es capaz de manipular gran cantidad de espadas, lanzas, mazos, armaduras.',
 	2.5,
 	1.5
 );
-insert into Clase (nombre, descripcion, indice_aumento_energia, indice_aumento_vitalidad) values (
+insert into Clase (nombre, descripcion, aumento_energia, aumento_vitalidad) values (
 	'Mago',
 	'Es capaz de controlar los 4 elementos: agua, tierra, fuego, aire. Y hacer uso de armas que lo dotan de hechizos y conjuros.',
 	2.7,
 	1.8
 );
-insert into Clase (nombre, descripcion, indice_aumento_vitalidad, indice_aumento_fuerza) values (
+insert into Clase (nombre, descripcion, aumento_vitalidad, aumento_fuerza) values (
 	'Clérigo',
 	'Capaz de invocar hechizos par revitalizar a sus aliados o dañar a sus enemigos. Posee gran cantidad de vida.',
 	3.5,
 	1.8
 );
-insert into Clase (nombre, descripcion, indice_aumento_agilidad, indice_aumento_fuerza) values (
+insert into Clase (nombre, descripcion, aumento_agilidad, aumento_fuerza) values (
 	'Arquero',
 	'Haciendo uso de arcos, flechas y lanzas, es capaz de atacar a sus enemigos desde una distancia segura.',
 	4.0,

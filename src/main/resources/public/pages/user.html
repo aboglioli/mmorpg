@@ -117,7 +117,13 @@
             Juego
         </div>
         <div class="panel-body">
-
+						Seleccione su personaje:
+						<select id="jugador" class="form-control" ng-options="jugador.nombre for jugador in jugadores" ng-model="s_jugador"></select>
+						<br>
+						<button type="button" class="btn btn-success">Ver inventario</button>
+						<button type="button" class="btn btn-primary">Atacar jugador al azar</button>
+						<button type="button" class="btn btn-primary">Atacar NPC al azar</button>
+					</form>
         </div>
     </div>
 </div>

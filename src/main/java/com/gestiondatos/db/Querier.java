@@ -133,4 +133,14 @@ public class Querier {
         }
         return ret.toArray();
     }
+
+    public static Object[] atacarJugador() {
+        DBConnector db = new DBConnector();
+        ArrayList<Object> ret = new ArrayList<Object>();
+        try {
+
+        } catch (SQLException exc) {
+            LogWindow.addRed(exc.toString());
+        }
+    }
 }

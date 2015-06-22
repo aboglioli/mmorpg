@@ -34,9 +34,9 @@ public class App
         });
 
         // Get
-        get("/jugadores/:usuario", "application/json", (req, res) -> {
-            if(req.session().attribute("usuario").equals(req.params(":usuario"))) {
-                Object ret[][] =  Querier.getJugadores(req.params(":usuario"));
+        get("/jugadores/", "application/json", (req, res) -> {
+            if(req.session().attribute("usuario") != null) {
+                Object ret[][] =  Querier.getJugadores(req.session().attribute("usuario"));
                 JSONArray jsonArr = new JSONArray();
                 for(Object obj[] : ret) {
                     JSONObject json = new JSONObject();
@@ -56,6 +56,12 @@ public class App
                     jsonArr.add(json);
                 }
                 return jsonArr.toJSONString();
+            }
+            return "{\"msg\": \"Usuario inválido\"}";
+        });
+        get("/atacar/jugador/:nombre", "application/json", (req, res) -> {
+            if(req.session().attribute("usuario") != null) {
+
             }
             return "{\"msg\": \"Usuario inválido\"}";
         });
