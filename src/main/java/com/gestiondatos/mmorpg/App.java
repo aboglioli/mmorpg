@@ -54,6 +54,7 @@ public class App
                     json.put("posicion_x", obj[11]);
                     json.put("posicion_y", obj[12]);
                     jsonArr.add(json);
+										return;
                 }
                 return jsonArr.toJSONString();
             }
